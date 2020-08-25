@@ -7,4 +7,10 @@ attr_reader :name, :ship_length, :health
     @ship_length = ship_length
     @health = ship_length
   end
+
+  def hit
+    @health -= 1
+  end
+  
+
 end
