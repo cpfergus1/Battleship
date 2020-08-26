@@ -17,5 +17,10 @@ class Board
     #require 'pry' ; binding.pry
   end
 
+  def valid_coordinate?(coordinate)
+    cells[coordinate] != nil
+  end
 
+  # def valid_placement?(name, coordinates)
+  # end
 end

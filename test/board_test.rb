@@ -21,6 +21,7 @@ class BoardTest <Minitest::Test
   end
 
   def test_valid_coordinate
+    board = Board.new
     assert_equal true, board.valid_coordinate?("A1")
     assert_equal true, board.valid_coordinate?("D4")
     assert_equal false, board.valid_coordinate?("A5")
@@ -43,4 +44,4 @@ class BoardTest <Minitest::Test
 #     assert_equal true, board.valid_placement?(submarine, ["A1", "A2"])
 #     assert_equal true, board.valid_placement?(cruiser, ["B1", "C1", "D1"])
 #   end
-# end
+end
