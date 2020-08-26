@@ -31,7 +31,7 @@ class Board
     end
   end
 
-
+  
 
   def consecutive_coordinates(ship, coordinates)
     valid_array_horizontal = []
@@ -46,12 +46,6 @@ class Board
         valid_array_vertical << new_coordinate_2
       end
     end
-    if valid_array_vertical.size < ship.length
-      valid_array_vertical = nil
-    end
-    if valid_array_horizontal.size < ship.length
-      valid_array_horizontal = nil
-    end
     possible_array = [valid_array_horizontal,valid_array_vertical]
-    end
   end
+end
