@@ -1,8 +1,8 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/ship'
-require './lib/cell'
-require '.lib/board'
+require './lib/ship.rb'
+require './lib/cell.rb'
+require './lib/board.rb'
 
 class BoardTest <Minitest::Test
 
@@ -10,3 +10,4 @@ class BoardTest <Minitest::Test
     board = Board.new
     assert_instance_of Board, board
   end
+end
