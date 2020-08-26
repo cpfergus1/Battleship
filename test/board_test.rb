@@ -19,4 +19,20 @@ class BoardTest <Minitest::Test
     assert_equal "A1", board.cells.values[0].coordinate
     assert_equal "D4", board.cells.values[15].coordinate
   end
+
+  def test_valid_placement?
+    board = Board.new
+    cruiser = Ship.new("cruiser", 3)
+    submarine = Ship.new("submarine", 2)
+    assert_equal false, board.valid_placement?(cruiser, ["A1", "A2"])
+    assert_equal false, board.valid_placement?(submarine, ["A2", "A3", "A4"])
+    assert_equal false, board.valid_placement?(cruiser, ["A1", "A2", "A4"])
+    assert_equal false, board.valid_placement?(submarine, ["A1", "C1"])
+    assert_equal false, board.valid_placement?(cruiser, ["A3", "A2", "A1"])
+    assert_equal false, board.valid_placement?(submarine, ["C1", "B1"])
+    assert_equal false, board.valid_placement?(cruiser, ["A1", "B2", "C3"])
+    assert_equal false, board.valid_placement?(submarine, ["C2", "D3"])
+    assert_equal true, board.valid_placement?(submarine, ["A1", "A2"])
+    assert_equal true, board.valid_placement?(cruiser, ["B1", "C1", "D1"])
+  end
 end
