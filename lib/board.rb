@@ -21,19 +21,22 @@ class Board
     cells[coordinate] != nil
   end
 
-  # def valid_placement?(ship, coordinates)
-  #   if coordinates.length != ship.length
-  #     false
-  #   elsif
-  #
-  #
+  def valid_placement?(ship, coordinates)
+    if coordinates.length != ship.length
+      false
+    elsif consecutive_coordinates(ship, coordinates).find{|coord| coord == coordinates} != nil
+      true
+    else
+      false
+    end
+  end
+
+
 
   def consecutive_coordinates(ship, coordinates)
     valid_array_horizontal = []
     valid_array_vertical = []
-    count = 0
-    #require 'pry'; binding.pry
-    while count < (ship.length)
+    ship.length.times do |count|
       new_coordinate = "#{coordinates[0][0]}#{coordinates[0][1].to_i + count}"
       if valid_coordinate?(new_coordinate)
         valid_array_horizontal << new_coordinate
@@ -42,7 +45,6 @@ class Board
       if valid_coordinate?(new_coordinate_2)
         valid_array_vertical << new_coordinate_2
       end
-      count += 1
     end
     if valid_array_vertical.size < ship.length
       valid_array_vertical = nil
@@ -51,6 +53,5 @@ class Board
       valid_array_horizontal = nil
     end
     possible_array = [valid_array_horizontal,valid_array_vertical]
-    require 'pry'; binding.pry
     end
   end
