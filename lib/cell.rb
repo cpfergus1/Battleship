@@ -28,4 +28,18 @@ class Cell
   def fired_upon?
     @fired_upon
   end
+
+  def render(optional=false)
+    if fired_upon? == true && empty? == true
+      "M"
+    elsif fired_upon? == false && empty? == false && optional == true
+      "S"
+    elsif fired_upon? == true && empty? == false && @ship.sunk? == true
+      "X"
+    elsif fired_upon? == true && empty? == false
+      "H"
+    else
+      "."
+    end
+  end
 end
