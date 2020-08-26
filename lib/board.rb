@@ -21,6 +21,36 @@ class Board
     cells[coordinate] != nil
   end
 
-  # def valid_placement?(name, coordinates)
-  # end
-end
+  # def valid_placement?(ship, coordinates)
+  #   if coordinates.length != ship.length
+  #     false
+  #   elsif
+  #
+  #
+
+  def consecutive_coordinates(ship, coordinates)
+    valid_array_horizontal = []
+    valid_array_vertical = []
+    count = 0
+    #require 'pry'; binding.pry
+    while count < (ship.length)
+      new_coordinate = "#{coordinates[0][0]}#{coordinates[0][1].to_i + count}"
+      if valid_coordinate?(new_coordinate)
+        valid_array_horizontal << new_coordinate
+      end
+      new_coordinate_2 = "#{(coordinates[0][0].ord + count).chr}#{coordinates[0][1]}"
+      if valid_coordinate?(new_coordinate_2)
+        valid_array_vertical << new_coordinate_2
+      end
+      count += 1
+    end
+    if valid_array_vertical.size < ship.length
+      valid_array_vertical = nil
+    end
+    if valid_array_horizontal.size < ship.length
+      valid_array_horizontal = nil
+    end
+    possible_array = [valid_array_horizontal,valid_array_vertical]
+    require 'pry'; binding.pry
+    end
+  end
