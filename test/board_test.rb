@@ -77,4 +77,13 @@ class BoardTest <Minitest::Test
     submarine = Ship.new("Submarine", 2)
     board.valid_placement?(submarine, ["A1", "B1"])
   end
+
+  def test_board_rendering
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    board.place(cruiser, ["A1", "A2", "A3"])
+    #require "pry"; binding.pry
+    board.render(true)
+    board.render
+  end
 end
