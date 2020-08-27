@@ -80,4 +80,26 @@ class Board
     end
     possible_array = [numbers,letters]
   end
+
+  def render(optional = false)
+      row_label = ["A","B","C","D"]
+      column_label = ["1","2","3","4"]
+      board_layout = row_label.map do |row|
+        column_label.map do |col|
+          @cells[row + col].render(optional)
+        end
+      end
+      print "\t"
+      print column_label.join("\t")
+      puts
+      board_layout.each_with_index do |row, index|
+        print row_label[index]
+        print "\t"
+        print row.join("\t")
+        puts
+      end
+      puts
+    end
+
+
 end
