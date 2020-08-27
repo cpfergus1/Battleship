@@ -6,12 +6,13 @@ require './lib/player.rb'
 require './lib/board.rb'
 require './lib/turn.rb'
 
-class TurnTest <  Minitest::Test
+class PlayerTest <  Minitest::Test
+
   def test_it_exists
     computer = Player.new
     user = Player.new
-    turn = Turn.new(computer, user)
 
-    assert_instance_of Turn, turn
+    assert_instance_of Player, computer
+    assert_instance_of Player, user 
   end
 end
