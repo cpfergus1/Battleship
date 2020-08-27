@@ -3,6 +3,7 @@ require './lib/cell.rb'
 
 class Board
 
+
   attr_reader :cells
 
   def initialize
@@ -42,20 +43,24 @@ class Board
 
   def valid_coordinate?(coordinate)
     #require 'pry' ; binding.pry
+
     cells[coordinate] != nil
   end
 
   def valid_placement?(ship, coordinates)
+
     #require "pry"; binding.pry
     if coordinates.size != ship.length
       false
     elsif consecutive_coordinates(coordinates).find{|coord| coord == coordinates} != nil &&
       coordinates.any? {|coordinate| @cells[coordinate].empty?}
+
       true
     else
       false
     end
   end
+
 
   def place(ship, coordinates)
     if valid_placement?(ship, coordinates)
@@ -79,5 +84,9 @@ class Board
       end
     end
     possible_array = [numbers,letters]
+
+  
+
+ 
   end
 end
