@@ -13,6 +13,14 @@ class PlayerTest <  Minitest::Test
     user = Player.new
 
     assert_instance_of Player, computer
-    assert_instance_of Player, user 
+    assert_instance_of Player, user
+  end
+
+  def test_player_has_a_board
+    computer = Player.new
+    user = Player.new
+    
+    assert_instance_of Board, user.board
+    assert_instance_of Board, computer.board
   end
 end

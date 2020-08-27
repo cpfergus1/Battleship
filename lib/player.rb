@@ -1,6 +1,7 @@
 class Player
 
+
   def initialize
-    @board = Board.new 
+    @board = Board.new
   end
 end
