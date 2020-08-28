@@ -37,9 +37,9 @@ class BoardTest <Minitest::Test
     cruiser = Ship.new("cruiser", 3)
     submarine = Ship.new("submarine", 2)
 
-    assert_equal [["A1","A2","A3"],["A1","B1","C1"]], board.consecutive_coordinates(cruiser, ["A1","A4","A2"])
-    assert_equal [["A3","A4"],["A3","B3","C3"]], board.consecutive_coordinates(cruiser, ["A3","A2","A1"])
-    assert_equal [["C1","C2","C3"],["C1","D1"]], board.consecutive_coordinates(cruiser, ["C1","C2","C4"])
+    assert_equal [["A1","A2","A3"],["A1","B1","C1"]], board.consecutive_coordinates(["A1","A4","A2"])
+    assert_equal [["A3","A4"],["A3","B3","C3"]], board.consecutive_coordinates(["A3","A2","A1"])
+    assert_equal [["C1","C2","C3"],["C1","D1"]], board.consecutive_coordinates(["C1","C2","C4"])
 
   end
 
@@ -83,7 +83,7 @@ class BoardTest <Minitest::Test
 
     board.place(cruiser, ["A1", "A2", "A3"])
     submarine = Ship.new("Submarine", 2)
-    
+
     board.valid_placement?(submarine, ["A1", "B1"])
   end
 

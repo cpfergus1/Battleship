@@ -69,38 +69,51 @@ class Board
   end
 
   def consecutive_coordinates(coordinates)
+
+    numbers = valid_row(coordinates)
+    letters = valid_col(coordinates)
+    [numbers,letters]
+  end
+
+  def valid_row(coordinates)
     numbers = []
-    letters = []
     coordinates.size.times do |count|
       new_coordinate = "#{coordinates[0][0]}#{coordinates[0][1].to_i + count}"
       if valid_coordinate?(new_coordinate)
         numbers << new_coordinate
       end
-      new_coordinate_2 = "#{(coordinates[0][0].ord + count).chr}#{coordinates[0][1]}"
-      if valid_coordinate?(new_coordinate_2)
-        letters << new_coordinate_2
-      end
     end
-    possible_array = [numbers,letters]
-  end
+    numbers
+  end 
 
-  def render(optional = false)
-      row_label = ["A","B","C","D"]
-      column_label = ["1","2","3","4"]
-      board_layout = row_label.map do |row|
-        column_label.map do |col|
-          @cells[row + col].render(optional)
+    def valid_col(coordinates)
+      letters = []
+      coordinates.size.times do |count|
+        new_coordinate_2 = "#{(coordinates[0][0].ord + count).chr}#{coordinates[0][1]}"
+        if valid_coordinate?(new_coordinate_2)
+          letters << new_coordinate_2
         end
       end
-      print "\t"
-      print column_label.join("\t")
-      puts
-      board_layout.each_with_index do |row, index|
-        print row_label[index]
-        print "\t"
-        print row.join("\t")
-        puts
+      letters
+    end
+
+  def render(optional = false)
+    row_label = ["A","B","C","D"]
+    column_label = ["1","2","3","4"]
+    board_layout = row_label.map do |row|
+      column_label.map do |col|
+        @cells[row + col].render(optional)
       end
+    end
+    print "\t"
+    print column_label.join("\t")
+    puts
+    board_layout.each_with_index do |row, index|
+      print row_label[index]
+      print "\t"
+      print row.join("\t")
       puts
+    end
+    puts
   end
 end
