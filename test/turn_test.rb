@@ -24,6 +24,14 @@ class TurnTest <  Minitest::Test
     assert_equal false, computer.board.cells.empty?
   end
 
+  def test_user_can_place_ships
+    computer = Player.new
+    user = Player.new
+    turn = Turn.new(computer, user)
+
+    turn.user_place_ships
+    assert_equal false, user.board.cells.empty?
+  end
 
 
   # def test_user_can_take_turn

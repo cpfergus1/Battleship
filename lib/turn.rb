@@ -17,8 +17,39 @@ class Turn
       break if check_random_coord_validity(ship, possible_coords[0], possible_coords[1])
     end
     end
-    require "pry"; binding.pry
+    #require "pry"; binding.pry
   end
+
+  def user_place_ships
+    ships = [user.cruiser, user.submarine]
+    ships.each do |ship|
+      user.board.render(true)
+      puts "Enter the squares for the #{ship.name} (#{ship.health} spaces):"
+      loop do
+        print ">"
+        user_input_coordinates = gets.chomp.split(' ')
+        break if check_user_input_validity(ship, user_input_coordinates)
+      end
+    end
+    #require "pry"; binding.pry
+  end
+
+
+  def check_user_input_validity(ship, coordinates)
+    if coordinates.all? {|coord| user.board.valid_coordinate?(coord)} &&
+      user.board.valid_placement?(ship,coordinates)
+      user.board.place(ship, coordinates)
+      return true
+    elsif coordinates.all? {|coord| user.board.valid_coordinate?(coord)}
+      puts "Invalid placement, please choose consecutive spaces on the board."
+      return false
+    else
+      puts "Invalid coordnates, please make sure all your coordinates are on the board"
+      return false
+    end
+  end
+
+
 
   def check_random_coord_validity(ship, possible_coords_1, possible_coords_2)
     #equire "pry"; binding.pry
