@@ -103,15 +103,18 @@ class Board
         @cells[row + col].render(optional)
       end
     end
-    print "\t"
-    print column_label.join("\t")
-    puts
-    board_layout.each_with_index do |row, index|
-      print row_label[index]
-      print "\t"
-      print row.join("\t")
-      puts
-    end
-    puts
+    string = print_board(row_label, column_label, board_layout)
+  end
+
+  def print_board(row_array, col_array, rendered_board)
+      board = ""
+      rendered_board.each_with_index do |row,index|
+        board << row_array[index].to_s +
+        "\t" +
+        row.join("\t") +
+        "\t" +
+        "\n"
+      end
+      string = "\t #{col_array.join("\t")}\n" + board
   end
 end
