@@ -80,13 +80,22 @@ class BoardTest <Minitest::Test
   def test_overlapping
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
-
     board.place(cruiser, ["A1", "A2", "A3"])
+
     submarine = Ship.new("Submarine", 2)
     board.place(submarine, ["A1", "B1"])
 
-
     assert_equal false, board.valid_placement?(submarine, ["A1", "B1"])
+
+    submarine = Ship.new("Submarine", 2)
+    board.place(submarine, ["A2", "B2"])
+
+    assert_equal false, board.valid_placement?(submarine, ["A2", "B2"])
+
+    submarine = Ship.new("Submarine", 2)
+    board.place(submarine, ["A3", "B3"])
+
+    assert_equal false, board.valid_placement?(submarine, ["A3", "B3"])
   end
 
   def test_board_rendering

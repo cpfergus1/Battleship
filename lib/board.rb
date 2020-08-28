@@ -50,15 +50,15 @@ class Board
   def valid_placement?(ship, coordinates)
     if coordinates.size != ship.length
       false
-    elsif consecutive_coordinates(coordinates).find{|coord| coord == coordinates} != nil &&
-      coordinates.any? do |coordinate|
-        @cells[coordinate].empty?
-      end
-      true
-    else
-      false
     end
-  end
+      if !coordinates.none?{|coord| cells[coord].ship == nil}
+        if consecutive_coordinates(coordinates).find{|coord| coord == coordinates} != nil
+      true
+        else
+      false
+        end
+      end
+  end 
 
 
   def place(ship, coordinates)
