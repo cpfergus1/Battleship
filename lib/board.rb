@@ -115,6 +115,6 @@ class Board
         "\t" +
         "\n"
       end
-      string = "\t #{col_array.join("\t")}\n" + board
+      "\t #{col_array.join("\t")}\n" + board
   end
 end
