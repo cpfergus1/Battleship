@@ -21,7 +21,7 @@ class Turn
   end
 
   def check_random_coord_validity(ship, possible_coords_1, possible_coords_2)
-    require "pry"; binding.pry
+    #equire "pry"; binding.pry
     if computer.board.valid_placement?(ship, possible_coords_1)
       computer.board.place(ship, possible_coords_1)
       return true
