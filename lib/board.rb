@@ -48,13 +48,10 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-
     #require "pry"; binding.pry
     if coordinates.size != ship.length
       false
-    elsif consecutive_coordinates(coordinates).find{|coord| coord == coordinates} != nil &&
-      coordinates.any? {|coordinate| @cells[coordinate].empty?}
-
+    elsif consecutive_coordinates(coordinates).find{|coord| coord == coordinates} != nil && coordinates.all?{|coord| @cells[coord].empty?}
       true
     else
       false
@@ -64,51 +61,60 @@ class Board
 
   def place(ship, coordinates)
     if valid_placement?(ship, coordinates)
-        coordinates.each do |coordinate|
-          @cells[coordinate].place_ship(ship)
+      coordinates.each do |coordinate|
+        @cells[coordinate].place_ship(ship)
       end
     end
   end
 
   def consecutive_coordinates(coordinates)
+    numbers = valid_row(coordinates)
+    letters = valid_col(coordinates)
+    [numbers,letters]
+  end
+
+  def valid_row(coordinates)
     numbers = []
-    letters = []
     coordinates.size.times do |count|
       new_coordinate = "#{coordinates[0][0]}#{coordinates[0][1].to_i + count}"
       if valid_coordinate?(new_coordinate)
         numbers << new_coordinate
       end
-      new_coordinate_2 = "#{(coordinates[0][0].ord + count).chr}#{coordinates[0][1]}"
-      if valid_coordinate?(new_coordinate_2)
-        letters << new_coordinate_2
-      end
     end
-    possible_array = [numbers,letters]
-
-  
-
- 
+    numbers
   end
 
-  def render(optional = false)
-      row_label = ["A","B","C","D"]
-      column_label = ["1","2","3","4"]
-      board_layout = row_label.map do |row|
-        column_label.map do |col|
-          @cells[row + col].render(optional)
+    def valid_col(coordinates)
+      letters = []
+      coordinates.size.times do |count|
+        new_coordinate_2 = "#{(coordinates[0][0].ord + count).chr}#{coordinates[0][1]}"
+        if valid_coordinate?(new_coordinate_2)
+          letters << new_coordinate_2
         end
       end
-      print "\t"
-      print column_label.join("\t")
-      puts
-      board_layout.each_with_index do |row, index|
-        print row_label[index]
-        print "\t"
-        print row.join("\t")
-        puts
-      end
-      puts
+      letters
     end
 
+  def render(optional = false)
+    row_label = ["A","B","C","D"]
+    column_label = ["1","2","3","4"]
+    board_layout = row_label.map do |row|
+      column_label.map do |col|
+        @cells[row + col].render(optional)
+      end
+    end
+    string = print_board(row_label, column_label, board_layout)
+  end
 
+  def print_board(row_array, col_array, rendered_board)
+      board = ""
+      rendered_board.each_with_index do |row,index|
+        board << row_array[index].to_s +
+        "\t" +
+        row.join("\t") +
+        "\t" +
+        "\n"
+      end
+      "\t #{col_array.join("\t")}\n" + board
+  end
 end
