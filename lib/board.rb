@@ -42,13 +42,10 @@ class Board
   # end
 
   def valid_coordinate?(coordinate)
-    #require 'pry' ; binding.pry
-
     cells[coordinate] != nil
   end
 
   def valid_placement?(ship, coordinates)
-    #require "pry"; binding.pry
     if coordinates.size != ship.length
       false
     elsif consecutive_coordinates(coordinates).find{|coord| coord == coordinates} != nil && coordinates.all?{|coord| @cells[coord].empty?}
