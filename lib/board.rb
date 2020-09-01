@@ -104,14 +104,14 @@ class Board
   end
 
   def print_board(row_array, col_array, rendered_board)
-      board = ""
-      rendered_board.each_with_index do |row,index|
-        board << row_array[index].to_s +
-        "\t" +
-        row.join("\t") +
-        "\t" +
-        "\n"
-      end
-      "\t #{col_array.join("\t")}\n" + board
+    board = ''
+    rendered_board.each_with_index do |row,index|
+      board << row_array[index].to_s +
+               "\t" +
+               row.join("\t") +
+               "\t" \
+               "\n"
+    end
+              "\t #{col_array.join("\t")}\n" + board
   end
 end
