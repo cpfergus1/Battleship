@@ -42,13 +42,10 @@ class Board
   # end
 
   def valid_coordinate?(coordinate)
-    #require 'pry' ; binding.pry
-
     cells[coordinate] != nil
   end
 
   def valid_placement?(ship, coordinates)
-    #require "pry"; binding.pry
     if coordinates.size != ship.length
       false
     elsif consecutive_coordinates(coordinates).find{|coord| coord == coordinates} != nil && coordinates.all?{|coord| @cells[coord].empty?}
@@ -107,14 +104,14 @@ class Board
   end
 
   def print_board(row_array, col_array, rendered_board)
-      board = ""
-      rendered_board.each_with_index do |row,index|
-        board << row_array[index].to_s +
-        "\t" +
-        row.join("\t") +
-        "\t" +
-        "\n"
-      end
-      "\t #{col_array.join("\t")}\n" + board
+    board = ''
+    rendered_board.each_with_index do |row,index|
+      board << row_array[index].to_s +
+               "\t" +
+               row.join("\t") +
+               "\t" \
+               "\n"
+    end
+              "\t #{col_array.join("\t")}\n" + board
   end
 end
