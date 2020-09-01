@@ -15,5 +15,10 @@ class TestGame <Minitest::Test
     assert_instance_of Game, game
   end
 
+  def test_welcoming_message
+    game = Game.new
+    assert_equal "test" , game.welcome_message
+
+  end
 
 end

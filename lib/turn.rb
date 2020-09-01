@@ -99,23 +99,23 @@ class Turn
     @user.board.cells[@computer_shot].fire_upon
   end
 
-  def user_results_message(coordinate)
-    if @computer.board.cells[coordinate].render == 'H'
-      puts "Your shot on #{coordinate} was a hit!"
-    elsif @computer.board.cells[coordinate].render == 'M'
-      puts "Your shot on #{coordinate} was a miss!"
-    elsif @computer.board.cells[coordinate].render == 'X'
-      puts "Your shot on #{coordinate} sunk my #{@computer.board.cells[coordinate].ship}!"
+  def user_results_message
+    if @computer.board.cells[user_shot].render == 'H'
+      puts "Your shot on #{user_shot} was a hit!"
+    elsif @computer.board.cells[user_shot].render == 'M'
+      puts "Your shot on #{user_shot} was a miss!"
+    elsif @computer.board.cells[user_shot].render == 'X'
+      puts "Your shot on #{user_shot} sunk my #{@computer.board.cells[user_shot].ship.name}!"
     end
   end
 
-  def computer_results_message(coordinate)
+  def computer_results_message
     if @user.board.cells[@computer_shot].render == 'M'
-      puts "My shot on #{coordinate} was a miss."
+      puts "My shot on #{computer_shot} was a miss."
     elsif @user.board.cells[@computer_shot].render == 'H'
-      puts "My shot on #{coordinate} was a hit."
+      puts "My shot on #{computer_shot} was a hit."
     elsif @user.board.cells[@computer_shot].render == 'X'
-      puts "My shot on #{coordinate} has sunk your #{@computer.board.cells[coordinate.ship]}!"
+      puts "My shot on #{computer_shot} has sunk your #{@computer.board.cells[computer_shot].ship.name}!"
     end
   end
 end

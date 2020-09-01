@@ -12,7 +12,7 @@ class Player
     @ships << @cruiser = Ship.new("Cruiser", 3)
   end
 
-  def has_won?
+  def has_lost?
     @ships.all? {|ship| ship.sunk?}
   end
 
