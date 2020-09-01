@@ -66,7 +66,7 @@ class Turn
   end
 
   def user_takes_shot
-    user_shot = nil
+    @user_shot = nil
     puts "=============COMPUTER BOARD============="
     print @computer.board.render
     puts "=============PLAYER BOARD============="
@@ -74,11 +74,11 @@ class Turn
     puts "Enter the coordinate for your shot:"
     print "> "
     loop do
-      user_shot = gets.chomp.upcase
-      if !@computer.board.valid_coordinate?(user_shot)
+      @user_shot = gets.chomp.upcase
+      if !@computer.board.valid_coordinate?(@user_shot)
         puts "Please enter a valid coordinate:"
         print "> "
-      elsif @computer.board.cells[user_shot].fired_upon?
+      elsif @computer.board.cells[@user_shot].fired_upon?
         puts "This coordinate has already been fired upon."
         puts "Please enter another coordinate."
         print "> "
@@ -107,6 +107,16 @@ class Turn
       puts "Your shot on #{coordinate} was a miss!"
     elsif @computer.board.cells[coordinate].render == "X"
       puts "Your shot on #{coordinate} sunk my #{@computer.board.cells[coordinate].ship}!"
+    end
+  end
+
+  def computer_results_message 
+    if @user.board.cells[@computer_shot].render == "M"
+      puts "My shot on #{coordinate} was a miss."
+    elsif @user.board.cells[@computer_shot].render == "H"
+      puts "My shot on #{coordinate} was a hit."
+    elsif @user.board.cells[@computer_shot].render == "X"
+      puts "My shot on #{coordinate} has sunk your #{@computer.board.cells[coordinate.ship]}!"
     end
   end
 end
