@@ -12,16 +12,14 @@ class Board
 
   def make_cells(len, hi)
     @length = [*1..len]
-    create_letter_array(hi)
+    @height = [*"A"..(hi + 64).chr]
     @height.each do |letter|
       @length.each do |number|
         cell = Cell.new("#{letter}#{number}")
         @cells["#{letter}#{number}"] = cell
       end
     end
-
     @cells
-
   end
 
   def valid_coordinate?(coordinate)
@@ -96,24 +94,5 @@ class Board
                "\n"
     end
     "\t #{col_array.join("\t")}\n" + board
-  end
-
-  def create_letter_array(hi)
-    mod = 0
-    pos = 0
-    if hi > 26
-      new_array = []
-      @height = [*"A".."Z"]
-      loop do
-        mod = (hi - 1) % 26
-        new_array << (@height[(pos / 26).ceil(0)] + (65 + mod).chr).strip
-        pos += 1
-        hi -= 1
-        break if (hi.to_f/26) == 1
-      end
-      @height = @height + new_array.sort
-    else
-      @height = [*"A"..(hi + 64).chr]
-    end
   end
 end

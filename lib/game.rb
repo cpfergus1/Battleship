@@ -65,26 +65,29 @@ class Game
   def select_board_size
     puts "Let's create the board! Your board will be length by height squares"
     loop do
-      puts "How long would you like the board?"
+      puts 'How long would you like the board?'
       print '> '
       board_length = gets.chomp.to_i
       print "\n \n"
-      puts "How tall would you like the board?"
+      puts 'How tall would you like the board?'
       print '> '
       board_height = gets.chomp.to_i
-      print "\n \n"
-      @user.board.make_cells(board_length, board_height)
-      @computer.board.make_cells(board_length, board_height)
-      system("clear")
-      puts "Does this look okay to you? Type yes to continue"
-      print @user.board.render
-      response = gets.chomp.upcase
-      if response == "Y" || response == "YES"
-        break
+      if board_height > 26 || board_length > 26
+        puts 'BATTLESHIP is limited to 26 cells'
       else
-        puts "Okay! Let's start over..."
+        print "\n \n"
+        @user.board.make_cells(board_length, board_height)
+        @computer.board.make_cells(board_length, board_height)
+        system('clear')
+        puts 'Does this look okay to you? Type yes to continue'
+        print @user.board.render
+        response = gets.chomp.upcase
+        if response == "Y" || response == "YES"
+        break
+        else
+          puts "Okay! Let's start over..."
+        end
       end
     end
   end
-
 end
