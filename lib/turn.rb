@@ -7,7 +7,7 @@ class Turn
   end
 
   def computer_place_ships
-    ships = [computer.cruiser, computer.submarine]
+    ships = computer.ships
     ships.each do |ship|
       loop do
         rand_coords = random_cell
@@ -20,7 +20,7 @@ class Turn
   end
 
   def user_place_ships
-    ships = [user.cruiser, user.submarine]
+    ships = user.ships
     ships.each do |ship|
       print user.board.render(true)
       puts "Enter the squares for the #{ship.name} (#{ship.health} spaces):"
@@ -87,7 +87,6 @@ class Turn
       end
     end
     @computer.board.cells[user_shot].fire_upon
-    user_results_message(user_shot)
   end
 
   def computer_takes_shot
@@ -101,21 +100,21 @@ class Turn
   end
 
   def user_results_message(coordinate)
-    if @computer.board.cells[coordinate].render == "H"
+    if @computer.board.cells[coordinate].render == 'H'
       puts "Your shot on #{coordinate} was a hit!"
-    elsif @computer.board.cells[coordinate].render == "M"
+    elsif @computer.board.cells[coordinate].render == 'M'
       puts "Your shot on #{coordinate} was a miss!"
-    elsif @computer.board.cells[coordinate].render == "X"
+    elsif @computer.board.cells[coordinate].render == 'X'
       puts "Your shot on #{coordinate} sunk my #{@computer.board.cells[coordinate].ship}!"
     end
   end
 
-  def computer_results_message 
-    if @user.board.cells[@computer_shot].render == "M"
+  def computer_results_message(coordinate)
+    if @user.board.cells[@computer_shot].render == 'M'
       puts "My shot on #{coordinate} was a miss."
-    elsif @user.board.cells[@computer_shot].render == "H"
+    elsif @user.board.cells[@computer_shot].render == 'H'
       puts "My shot on #{coordinate} was a hit."
-    elsif @user.board.cells[@computer_shot].render == "X"
+    elsif @user.board.cells[@computer_shot].render == 'X'
       puts "My shot on #{coordinate} has sunk your #{@computer.board.cells[coordinate.ship]}!"
     end
   end
