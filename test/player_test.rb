@@ -19,8 +19,12 @@ class PlayerTest <  Minitest::Test
   def test_player_has_a_board
     computer = Player.new
     user = Player.new
-    
+
     assert_instance_of Board, user.board
     assert_instance_of Board, computer.board
   end
+
+  def test_player_can_get_ships
+    
+
 end

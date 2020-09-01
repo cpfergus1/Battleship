@@ -1,9 +1,19 @@
 class Player
-  attr_reader :board, :submarine, :cruiser
+  attr_reader :board, :ships
 
   def initialize
     @board = Board.new
-    @submarine = Ship.new("Submarine", 2)
-    @cruiser = Ship.new("Cruiser", 3)
+    @ships = []
+
   end
+
+  def get_ships
+    @ships << @submarine = Ship.new("Submarine", 2)
+    @ships << @cruiser = Ship.new("Cruiser", 3)
+  end
+
+  def has_lost?
+    @ships.all? {|ship| ship.sunk?}
+  end
+
 end
