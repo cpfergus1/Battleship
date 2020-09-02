@@ -2,44 +2,25 @@ require './lib/ship.rb'
 require './lib/cell.rb'
 
 class Board
-
-
   attr_reader :cells
 
   def initialize
-    @cells = {
-      "A1" => Cell.new("A1"),
-      "A2" => Cell.new("A2"),
-      "A3" => Cell.new("A3"),
-      "A4" => Cell.new("A4"),
-      "B1" => Cell.new("B1"),
-      "B2" => Cell.new("B2"),
-      "B3" => Cell.new("B3"),
-      "B4" => Cell.new("B4"),
-      "C1" => Cell.new("C1"),
-      "C2" => Cell.new("C2"),
-      "C3" => Cell.new("C3"),
-      "C4" => Cell.new("C4"),
-      "D1" => Cell.new("D1"),
-      "D2" => Cell.new("D2"),
-      "D3" => Cell.new("D3"),
-      "D4" => Cell.new("D4")
-    }
+    @cells = {}
+    @length = []
+    @height = []
   end
 
-  # def make_cells
-  #
-  #   board_length = [1,2,3,4]
-  #   board_height = ['A','B','C','D']
-  #   board_height.each do |letter|
-  #     board_length.each do |number|
-  #       cell = Cell.new("#{letter}#{number}")
-  #       cells["#{letter}#{number}"] = cell
-  #     end
-  #   end
-  #   @cells
-  #   require 'pry' ; binding.pry
-  # end
+  def make_cells(len, hi)
+    @length = [*1..len]
+    @height = [*"A"..(hi + 64).chr]
+    @height.each do |letter|
+      @length.each do |number|
+        cell = Cell.new("#{letter}#{number}")
+        @cells["#{letter}#{number}"] = cell
+      end
+    end
+    @cells
+  end
 
   def valid_coordinate?(coordinate)
     cells[coordinate] != nil
@@ -93,25 +74,25 @@ class Board
     end
 
   def render(optional = false)
-    row_label = ["A","B","C","D"]
-    column_label = ["1","2","3","4"]
+    row_label = @height
+    column_label = @length
     board_layout = row_label.map do |row|
       column_label.map do |col|
-        @cells[row + col].render(optional)
+        @cells[row + col.to_s].render(optional)
       end
     end
-    string = print_board(row_label, column_label, board_layout)
+    print_board(row_label, column_label, board_layout)
   end
 
   def print_board(row_array, col_array, rendered_board)
     board = ''
-    rendered_board.each_with_index do |row,index|
+    rendered_board.each_with_index do |row, index|
       board << row_array[index].to_s +
                "\t" +
                row.join("\t") +
                "\t" \
                "\n"
     end
-              "\t #{col_array.join("\t")}\n" + board
+    "\t #{col_array.join("\t")}\n" + board
   end
 end
