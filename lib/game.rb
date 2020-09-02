@@ -21,8 +21,7 @@ class Game
     loop do
       @turn.user_takes_shot
       @turn.computer_takes_shot
-      print "\n \n \n"
-      puts "============ RESULTS ============"
+      print "\n \n \n============ RESULTS ============"
       @turn.user_results_message
       @turn.computer_results_message
       sleep(3)
@@ -35,8 +34,7 @@ class Game
 
   def welcome_message
     puts 'Welcome to BATTLESHIP'
-    puts 'Enter p to play. Enter q to quit.'
-    print '> '
+    print "Enter p to play. Enter q to quit. \n> "
     user_in = gets.chomp.downcase
     if user_in == 'p'
       @computer = Player.new
@@ -68,8 +66,7 @@ class Game
     return ship_array if response == "NO"
     create_ship_message
     name = gets.chomp.downcase.capitalize
-    puts 'How many cells will the ship occupy? (input integer)'
-    print '> '
+    print 'How many cells will the ship occupy? (input integer) \n> '
     length = Integer(gets)
     check_ship_validity(name, length)
     system('clear')
@@ -78,8 +75,7 @@ class Game
 
   def create_ship_message
     puts "Let's create a ship! \n"
-    puts "What is the name of your ship?"
-    print "> "
+    print "What is the name of your ship? \n> "
   end
 
   def game_setup
@@ -133,12 +129,9 @@ class Game
 
   def user_board_size_input
     puts "Let's create the board! Your board will be length by height squares"
-    puts 'How long would you like the board?'
-    print '> '
+    print "How long would you like the board? \n> "
     @board_length = gets.chomp.to_i
-    print "\n \n"
-    puts 'How tall would you like the board?'
-    print '> '
+    print "\n \nHow tall would you like the board? \n> "
     @board_height = gets.chomp.to_i
   end
 

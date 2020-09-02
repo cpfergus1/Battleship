@@ -1,9 +1,8 @@
-require 'minitest/autorun'
-require 'minitest/pride'
-require './lib/ship.rb'
+require "minitest/autorun"
+require "minitest/pride"
+require "./lib/ship.rb"
 
-
-class TestShip <Minitest::Test
+class ShipTest < Minitest::Test
   def setup
     @cruiser = Ship.new("Cruiser", 3)
   end
@@ -24,7 +23,7 @@ class TestShip <Minitest::Test
 
     assert_equal 1, @cruiser.hit
     assert_equal 1, @cruiser.health
-    
+
     assert_equal 0, @cruiser.hit
     assert_equal 0, @cruiser.health
     assert_equal 3, @cruiser.length

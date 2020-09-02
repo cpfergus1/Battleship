@@ -8,7 +8,7 @@ require "./lib/board.rb"
 require "./lib/turn.rb"
 require "./lib/game.rb"
 
-class TestGame < Minitest::Test
+class GameTest < Minitest::Test
   def test_instance_of
     game = Game.new
     assert_instance_of Game, game
