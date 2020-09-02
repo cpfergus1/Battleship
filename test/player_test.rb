@@ -28,8 +28,9 @@ class PlayerTest <  Minitest::Test
     computer = Player.new
     user = Player.new
     ships_array = [["Cruiser", 3],["Submarine", 2]]
+    
     user.get_ships(ships_array)
-    require "pry"; binding.pry
+
     assert_equal 2, user.ships.size
   end
 end

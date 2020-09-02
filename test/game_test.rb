@@ -18,7 +18,5 @@ class TestGame <Minitest::Test
   def test_welcoming_message
     game = Game.new
     assert_equal "test" , game.welcome_message
-
   end
-
 end

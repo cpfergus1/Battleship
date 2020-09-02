@@ -4,7 +4,6 @@ class Player
   def initialize
     @board = Board.new
     @ships = []
-
   end
 
   def get_ships(ships_array)
@@ -16,6 +15,4 @@ class Player
   def has_lost?
     @ships.all? {|ship| ship.sunk?}
   end
-
-
 end

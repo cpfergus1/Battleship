@@ -21,8 +21,10 @@ class TestShip <Minitest::Test
   def test_ship_has_been_hit
     assert_equal 2, @cruiser.hit
     assert_equal 2, @cruiser.health
+
     assert_equal 1, @cruiser.hit
     assert_equal 1, @cruiser.health
+    
     assert_equal 0, @cruiser.hit
     assert_equal 0, @cruiser.health
     assert_equal 3, @cruiser.length
@@ -30,10 +32,13 @@ class TestShip <Minitest::Test
 
   def test_ship_has_sunk
     assert_equal false, @cruiser.sunk?
+
     @cruiser.hit
     assert_equal false, @cruiser.sunk?
+
     @cruiser.hit
     assert_equal false, @cruiser.sunk?
+
     @cruiser.hit
     assert_equal true, @cruiser.sunk?
   end

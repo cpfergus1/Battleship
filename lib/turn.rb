@@ -25,27 +25,26 @@ class Turn
       print user.board.render(true)
       puts "Enter the squares for the #{ship.name} (#{ship.health} spaces):"
       print ">"
-      user_input_coordinates = gets.chomp.upcase.split(' ')
+      user_input_coordinates = gets.chomp.upcase.split(" ")
       check_user_input_validity(ship, user_input_coordinates)
     end
     print user.board.render(true)
   end
 
-
   def check_user_input_validity(ship, coordinates)
-    loop do
-      if check_coordinates?(coordinates) && valid_ship_placement?(ship, coordinates)
-        user.board.place(ship, coordinates)
-        return
-      elsif check_coordinates?(coordinates)
-        puts "Invalid placement, please choose consecutive spaces on the board."
-        print ">"
-        coordinates = gets.chomp.upcase.split(' ')
-      else
-        puts "Invalid coordnates, please make sure all your coordinates are on the board"
-        print ">"
-        coordinates = gets.chomp.upcase.split(' ')
-      end
+    if check_coordinates?(coordinates) && valid_ship_placement?(ship, coordinates)
+      user.board.place(ship, coordinates)
+      return
+    elsif check_coordinates?(coordinates)
+      puts "Invalid placement, please choose consecutive spaces on the board."
+      print ">"
+      coordinates = gets.chomp.upcase.split(" ")
+      check_user_input_validity(ship, coordinates)
+    else
+      puts "Invalid coordnates, please make sure all your coordinates are on the board"
+      print ">"
+      coordinates = gets.chomp.upcase.split(" ")
+      check_user_input_validity(ship, coordinates)
     end
   end
 
@@ -65,12 +64,12 @@ class Turn
 
   def user_takes_shot
     @user_shot = nil
-    puts '=============COMPUTER BOARD============='
+    puts "=============COMPUTER BOARD============="
     print @computer.board.render
-    puts '=============PLAYER BOARD============='
+    puts "=============PLAYER BOARD============="
     print @user.board.render(true)
-    puts 'Enter the coordinate for your shot:'
-    print '> '
+    puts "Enter the coordinate for your shot:"
+    print "> "
     @user_shot = gets.chomp.upcase
     user_shot_check
   end
@@ -85,40 +84,40 @@ class Turn
   end
 
   def user_results_message
-    if @computer.board.cells[user_shot].render == 'H'
+    if @computer.board.cells[user_shot].render == "H"
       puts "Your shot on #{user_shot} was a hit!"
-    elsif @computer.board.cells[user_shot].render == 'M'
+    elsif @computer.board.cells[user_shot].render == "M"
       puts "Your shot on #{user_shot} was a miss!"
-    elsif @computer.board.cells[user_shot].render == 'X'
+    elsif @computer.board.cells[user_shot].render == "X"
       puts "Your shot on #{user_shot} sunk my #{@computer.board.cells[user_shot].ship.name}!"
     end
   end
 
   def computer_results_message
-    if @user.board.cells[@computer_shot].render == 'M'
+    if @user.board.cells[@computer_shot].render == "M"
       puts "My shot on #{computer_shot} was a miss."
-    elsif @user.board.cells[@computer_shot].render == 'H'
+    elsif @user.board.cells[@computer_shot].render == "H"
       puts "My shot on #{computer_shot} was a hit."
-    elsif @user.board.cells[@computer_shot].render == 'X'
+    elsif @user.board.cells[@computer_shot].render == "X"
       puts "My shot on #{computer_shot} has sunk your #{@computer.board.cells[computer_shot].ship.name}!"
     end
   end
 
   def check_coordinates?(coordinates)
-    coordinates.all? {|coord| user.board.valid_coordinate?(coord)}
+    coordinates.all? { |coord| user.board.valid_coordinate?(coord) }
   end
 
   def valid_ship_placement?(ship, coordinates)
-    user.board.valid_placement?(ship,coordinates)
+    user.board.valid_placement?(ship, coordinates)
   end
 
   def user_shot_check
     if !@computer.board.valid_coordinate?(@user_shot)
-      puts 'Please enter a valid coordinate:'
+      puts "Please enter a valid coordinate:"
       user_takes_shot
     elsif @computer.board.cells[@user_shot].fired_upon?
-      puts 'This coordinate has already been fired upon.'
-      puts 'Please enter another coordinate.'
+      puts "This coordinate has already been fired upon."
+      puts "Please enter another coordinate."
       user_takes_shot
     else
       @computer.board.cells[user_shot].fire_upon
