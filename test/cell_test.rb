@@ -28,7 +28,7 @@ class CellTest < Minitest::Test
     assert_equal false, cell.empty?
   end
 
-  def test_it_can_be_fired_upon
+  def test_it_can_fire_upon_and_be_fired_upon
     cell = Cell.new("B4")
     cruiser = Ship.new("Cruiser", 3)
 

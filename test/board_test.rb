@@ -16,6 +16,18 @@ class BoardTest < Minitest::Test
     assert_instance_of Board, @board
   end
 
+  def test_it_can_make_cells
+    len = 4
+    hi = 4
+    @board.make_cells(len, hi)
+    assert_equal 16, @board.cells.values.size
+
+    len = 5
+    hi = 5
+    @board.make_cells(len, hi)
+    assert_equal 25, @board.cells.values.size
+  end
+
   def test_board_has_attributes
     @board.make_cells(4, 4)
 

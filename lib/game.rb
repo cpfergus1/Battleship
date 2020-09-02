@@ -60,19 +60,10 @@ class Game
     end
   end
 
-  def select_board_size
-    user_board_size_input
-    if @board_height > 26 || @board_length > 26
-        puts 'BATTLESHIP is limited to 26 cells'
-        select_board_size
-    else
-      make_board
-    end
-  end
-
   def create_ships
-    ship_names = @ship_array.map {|ship| ship[0]}
-    more_ships_message
+    ship_names = @ship_array.map { |ship| ship[0] }
+    print "Current Ships are #{ship_names.join(", ")} \n \n"
+    puts "Would you like to make another ship? Yes or No"
     response = gets.chomp.upcase
     return ship_array if response == "NO"
     create_ship_message
@@ -91,11 +82,6 @@ class Game
     print "> "
   end
 
-  def more_ships_message
-    print "Current Ships are #{ship_names.join(", ")} \n \n"
-    puts 'Would you like to make another ship? Yes or No'
-  end
-
   def game_setup
     select_board_size
     ships = create_ships
@@ -109,20 +95,30 @@ class Game
     puts "Let's go to war! \n \n"
   end
 
-  def ship_placement_message
-    puts "I have laid out my ships on the grid."
-    puts "You now need to lay out your #{@user.ships.length} ships."
-    puts "The Cruiser is three units long and the Submarine is two units long."
+  def select_board_size
+    user_board_size_input
+    if @board_height > 26 || @board_length > 26
+      puts "BATTLESHIP is limited to 26 cells"
+      select_board_size
+    else
+      make_board
+    end
   end
 
   def make_board
     print "\n \n"
     @user.board.make_cells(@board_length, @board_height)
     @computer.board.make_cells(@board_length, @board_height)
-    system('clear')
-    puts 'Does this look okay to you? Type yes to continue'
+    system("clear")
+    puts "Does this look okay to you? Type yes to continue"
     print @user.board.render
     make_board_response
+  end
+
+  def ship_placement_message
+    puts "I have laid out my ships on the grid."
+    puts "You now need to lay out your #{@user.ships.length} ships."
+    puts "The Cruiser is three units long and the Submarine is two units long."
   end
 
   def make_board_response
@@ -145,7 +141,6 @@ class Game
     print '> '
     @board_height = gets.chomp.to_i
   end
-
 
   def check_ship_validity(name, length)
     if (name.is_a? String) && (length <= @board_length || length <= @board_height)

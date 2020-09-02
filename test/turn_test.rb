@@ -47,4 +47,8 @@ class TurnTest < Minitest::Test
     @turn.computer_takes_shot
     assert_equal true, @user.board.cells.values.any? { |cell| cell.fired_upon? }
   end
+
+  def test_it_can_check_coordinates
+    assert_equal true, @turn.check_coordinates?(["A4"])
+  end
 end

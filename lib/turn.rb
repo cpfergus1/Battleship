@@ -51,10 +51,10 @@ class Turn
   def check_random_coord_validity(ship, possible_coords_1, possible_coords_2)
     if computer.board.valid_placement?(ship, possible_coords_1)
       computer.board.place(ship, possible_coords_1)
-      return true
+      true
     elsif computer.board.valid_placement?(ship, possible_coords_2)
       computer.board.place(ship, possible_coords_2)
-      return true
+      true
     end
   end
 
