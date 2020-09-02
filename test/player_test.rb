@@ -24,7 +24,12 @@ class PlayerTest <  Minitest::Test
     assert_instance_of Board, computer.board
   end
 
-  def test_player_can_get_ships
-    
-
+  def test_player_can_make_ships
+    computer = Player.new
+    user = Player.new
+    ships_array = [["Cruiser", 3],["Submarine", 2]]
+    user.get_ships(ships_array)
+    require "pry"; binding.pry
+    assert_equal 2, user.ships.size
+  end
 end

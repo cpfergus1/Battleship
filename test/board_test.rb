@@ -16,7 +16,7 @@ class BoardTest <Minitest::Test
   end
 
   def test_board_has_attributes
-    @board.make_cells(4, 28)
+    @board.make_cells(4, 4)
     assert_nil nil, @board.cells
     assert_equal 16, @board.cells.keys.length
     assert_equal 16, @board.cells.values.length
@@ -24,7 +24,7 @@ class BoardTest <Minitest::Test
     assert_equal "D4", @board.cells.values[15].coordinate
   end
 
-  def test_valid_coordinat
+  def test_valid_coordinate
     assert_equal true, @board.valid_coordinate?("A1")
     assert_equal true, @board.valid_coordinate?("D4")
     assert_equal false, @board.valid_coordinate?("A5")
@@ -55,6 +55,11 @@ class BoardTest <Minitest::Test
     assert_equal true, @board.valid_placement?(cruiser, ["B1", "C1", "D1"])
     assert_equal false, @board.valid_placement?(cruiser, ["B1", "B2"])
     assert_equal false, @board.valid_placement?(cruiser, ["D3", "D4", "D5"])
+    @board = Board.new
+    @board.make_cells(26,26)
+    assert_equal true, @board.valid_placement?(cruiser, ["D3", "D4", "D5"])
+    assert_equal true, @board.valid_placement?(cruiser, ["Z3", "Z4", "Z5"])
+    assert_equal true, @board.valid_placement?(cruiser, ["W3", "X3", "Y3"])
   end
 
   def test_place_cruiser
