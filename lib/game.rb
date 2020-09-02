@@ -25,7 +25,7 @@ class Game
       puts "============ RESULTS ============"
       @turn.user_results_message
       @turn.computer_results_message
-      sleep(4)
+      sleep(3)
       break if check_for_loss
 
       system ("clear")
@@ -60,25 +60,13 @@ class Game
     end
   end
 
-  def select_board_size
-    user_board_size_input
-    if @board_height > 26 || @board_length > 26
-        puts 'BATTLESHIP is limited to 26 cells'
-        select_board_size
-    else
-      make_board
-    end
-  end
-
   def create_ships
-    ship_names = @ship_array.map {|ship| ship[0]}
+    ship_names = @ship_array.map { |ship| ship[0] }
     print "Current Ships are #{ship_names.join(", ")} \n \n"
-    puts 'Would you like to make another ship? Yes or No'
+    puts "Would you like to make another ship? Yes or No"
     response = gets.chomp.upcase
     return ship_array if response == "NO"
-    puts "Let's create a ship! \n"
-    puts 'What is the name of your ship?'
-    print '> '
+    create_ship_message
     name = gets.chomp.downcase.capitalize
     puts 'How many cells will the ship occupy? (input integer)'
     print '> '
@@ -88,6 +76,12 @@ class Game
     print "\n \n"
   end
 
+  def create_ship_message
+    puts "Let's create a ship! \n"
+    puts "What is the name of your ship?"
+    print "> "
+  end
+
   def game_setup
     select_board_size
     ships = create_ships
@@ -95,24 +89,42 @@ class Game
     @user.get_ships(ships)
     @turn = Turn.new(@computer, @user)
     @turn.computer_place_ships
-    puts 'I have laid out my ships on the grid.'
-    puts "You now need to lay out your #{@user.ships.length} ships."
-    puts 'The Cruiser is three units long and the Submarine is two units long.'
+    ship_placement_message
     @turn.user_place_ships
     system ("clear")
     puts "Let's go to war! \n \n"
+  end
+
+  def select_board_size
+    user_board_size_input
+    if @board_height > 26 || @board_length > 26
+      puts "BATTLESHIP is limited to 26 cells"
+      select_board_size
+    else
+      make_board
+    end
   end
 
   def make_board
     print "\n \n"
     @user.board.make_cells(@board_length, @board_height)
     @computer.board.make_cells(@board_length, @board_height)
-    system('clear')
-    puts 'Does this look okay to you? Type yes to continue'
+    system("clear")
+    puts "Does this look okay to you? Type yes to continue"
     print @user.board.render
+    make_board_response
+  end
+
+  def ship_placement_message
+    puts "I have laid out my ships on the grid."
+    puts "You now need to lay out your #{@user.ships.length} ships."
+    puts "The Cruiser is three units long and the Submarine is two units long."
+  end
+
+  def make_board_response
     response = gets.chomp.upcase
     if response == "Y" || response == "YES"
-        'Lets go to war!'
+     "Lets go to war!"
     else
       puts "Okay! Let's start over..."
       select_board_size

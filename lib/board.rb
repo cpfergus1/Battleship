@@ -1,5 +1,5 @@
-require './lib/ship.rb'
-require './lib/cell.rb'
+require "./lib/ship.rb"
+require "./lib/cell.rb"
 
 class Board
   attr_reader :cells
@@ -29,13 +29,12 @@ class Board
   def valid_placement?(ship, coordinates)
     if coordinates.size != ship.length
       false
-    elsif consecutive_coordinates(coordinates).find{|coord| coord == coordinates} != nil && coordinates.all?{|coord| @cells[coord].empty?}
+    elsif consecutive_coordinates(coordinates).find { |coord| coord == coordinates } != nil && coordinates.all? { |coord| @cells[coord].empty? }
       true
     else
       false
     end
   end
-
 
   def place(ship, coordinates)
     if valid_placement?(ship, coordinates)
@@ -48,7 +47,7 @@ class Board
   def consecutive_coordinates(coordinates)
     numbers = valid_row(coordinates)
     letters = valid_col(coordinates)
-    [numbers,letters]
+    [numbers, letters]
   end
 
   def valid_row(coordinates)
@@ -62,16 +61,16 @@ class Board
     numbers
   end
 
-    def valid_col(coordinates)
-      letters = []
-      coordinates.size.times do |count|
-        new_coordinate_2 = "#{(coordinates[0][0].ord + count).chr}#{coordinates[0][1]}"
-        if valid_coordinate?(new_coordinate_2)
-          letters << new_coordinate_2
-        end
+  def valid_col(coordinates)
+    letters = []
+    coordinates.size.times do |count|
+      new_coordinate_2 = "#{(coordinates[0][0].ord + count).chr}#{coordinates[0][1]}"
+      if valid_coordinate?(new_coordinate_2)
+        letters << new_coordinate_2
       end
-      letters
     end
+    letters
+  end
 
   def render(optional = false)
     row_label = @height
@@ -85,7 +84,7 @@ class Board
   end
 
   def print_board(row_array, col_array, rendered_board)
-    board = ''
+    board = ""
     rendered_board.each_with_index do |row, index|
       board << row_array[index].to_s +
                "\t" +

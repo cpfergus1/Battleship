@@ -1,2 +1,3 @@
-require './lib/game.rb'
+require "./lib/game.rb"
+
 Game.new.welcome_message
