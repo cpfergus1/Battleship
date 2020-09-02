@@ -23,8 +23,7 @@ class Turn
     ships = user.ships
     ships.each do |ship|
       print user.board.render(true)
-      puts "Enter the squares for the #{ship.name} (#{ship.health} spaces):"
-      print ">"
+      print "Enter the squares for the #{ship.name} (#{ship.health} spaces): \n> "
       user_input_coordinates = gets.chomp.upcase.split(" ")
       check_user_input_validity(ship, user_input_coordinates)
     end
@@ -36,13 +35,11 @@ class Turn
       user.board.place(ship, coordinates)
       return
     elsif check_coordinates?(coordinates)
-      puts "Invalid placement, please choose consecutive spaces on the board."
-      print ">"
+      print "Invalid placement, please choose consecutive spaces on the board. \n> "
       coordinates = gets.chomp.upcase.split(" ")
       check_user_input_validity(ship, coordinates)
     else
-      puts "Invalid coordnates, please make sure all your coordinates are on the board"
-      print ">"
+      print "Invalid coordnates, please make sure all your coordinates are on the board \n> "
       coordinates = gets.chomp.upcase.split(" ")
       check_user_input_validity(ship, coordinates)
     end
@@ -68,8 +65,7 @@ class Turn
     print @computer.board.render
     puts "=============PLAYER BOARD============="
     print @user.board.render(true)
-    puts "Enter the coordinate for your shot:"
-    print "> "
+    print "Enter the coordinate for your shot: \n> "
     @user_shot = gets.chomp.upcase
     user_shot_check
   end
